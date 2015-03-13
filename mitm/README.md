@@ -24,7 +24,7 @@ PING 10.0.1.10 (10.0.1.10): 56 data bytes
 Don't stop the command.
 
 ## Executing the attack
-The attack is started through the script [mitm.sh](mitm/mitm.sh):
+The attack is started through the script [mitm.sh](../../mitm/mitm.sh):
 ```
 # ./mitm.sh
 ```
