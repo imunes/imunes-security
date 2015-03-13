@@ -54,6 +54,10 @@ node n3 {
 	!
 	!
 	!
+	ip route 0.0.0.0/0 10.0.0.1
+	!
+	ipv6 route ::/0 fc00::1
+	!
     }
     canvas c0
     iconcoords {456.0 504.0}
