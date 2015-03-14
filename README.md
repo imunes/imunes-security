@@ -8,3 +8,6 @@ which is used to create a virtual network topology by using FreeBSD
 
 All presented scenarios run on in the IMUNES virtual machine that can be
 downloaded from: http://www.imunes.net/dl/IMUNES.ova.
+
+To run the scenarios, after starting the virtual machine, just clone the git
+repository into the machine and follow the instructions.
