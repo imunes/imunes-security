@@ -2,8 +2,7 @@
 
 # enable MONLIST in ntp.conf and start the ntpd on n# nodes
 for x in $(seq 1 16); do 
-    sudo himage n$x  sed -i"" -e "$ a \\
-enable monitor" /etc/ntp.conf
+    sudo hcp ntp.conf n$x:/etc/
     sudo himage n$x service ntpd onestart
 done
 
@@ -11,6 +10,6 @@ done
 sudo hcp ntp.scapy Attacker:
 
 # start capture of the attack packets
-sudo himage Attacker tcpdump -ni eth0 -c 16 port 123 &
+sudo himage Attacker tcpdump -ni eth0 -c 16 -w ntp.pcap port 123 &
 # start the scapy script that crafts the attack packets
 sudo himage Attacker scapy -c ntp.scapy
