@@ -678,7 +678,7 @@ link l19 {
 
 link l17 {
     nodes {n20 n17}
-    bandwidth 0
+    bandwidth 100000000
 }
 
 link l20 {
