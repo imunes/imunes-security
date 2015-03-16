@@ -115,7 +115,7 @@ node n2 {
 node n4 {
     type host
     network-config {
-	hostname n4
+	hostname host
 	!
 	interface eth0
 	 ip address 10.0.1.10/24
