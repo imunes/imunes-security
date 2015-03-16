@@ -24,6 +24,6 @@ chroot $VROOT mkdir -p /usr/local/etc/lighttpd/certs
 
 # compile and install lighttpd
 cd $VROOT/tmp/lighttpd-1.4.17
-./configure --with-openssl
+./configure --with-openssl --with-openssl-libs=/tmp/openssl-1.0.1a/
 make -j4
 chroot $VROOT make install -C /tmp/lighttpd-1.4.17/
