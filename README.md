@@ -10,4 +10,8 @@ All presented scenarios run on in the IMUNES virtual machine that can be
 downloaded from: http://www.imunes.net/dl/IMUNES_security.ova.
 
 To run the scenarios, after starting the virtual machine, just git pull the latest
-version of the repository in /root/imunes-security.
+version of the repository in /root/imunes-security:
+```
+# cd imunes-security
+# git pull
+```
