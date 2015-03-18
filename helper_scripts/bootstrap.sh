@@ -2,11 +2,12 @@
 
 VROOT=/var/imunes/vroot
 SRCS="openssl lighttpd"
+PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake nessus metasploit"
+
 
 cp /etc/resolv.conf $VROOT/etc
 # install missing packages
-pkg -c $VROOT install dsniff scapy p0f nmap ettercap tcpreplay hping gmake
-# fetch sources for boulding and extract them
+pkg -c $VROOT install $PKGS # fetch sources for boulding and extract them
 for file in $SRCS; do
 	fetch http://www.imunes.net/dl/$file.tar.gz
 	tar xf $file.tar.gz -C $VROOT/tmp/
@@ -15,7 +16,7 @@ done
 rm $VROOT/etc/resolv.conf
 
 # compile and install openssl
-cd $VROOT/tmp/openssl-1.0.1a && ./config && gmake && echo SUCCESS
+cd $VROOT/tmp/openssl-1.0.1a && ./config && gmake
 chroot $VROOT make install -C /tmp/openssl-1.0.1a/
 mv $VROOT/usr/bin/openssl $VROOT/usr/bin/openssl_bkp
 chroot $VROOT ln -s /tmp/openssl-1.0.1a/apps/openssl /usr/bin/openssl
