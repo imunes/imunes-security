@@ -1,19 +1,5 @@
-## Starting the experiment
-From shell:
-```
-# imunes -b mitm.imn
-```
-or from GUI:
-```
-# imunes mitm.imn
-```
-and then *Experiment -> Execute*.
-
 ## Check network connectivity
-Open a shell on the PC node by double clicking in the GUI or by using the [himage](http://imunes.tel.fer.hr/trac/wiki/WikiImunesExamples#himage) command from shell.
-```
-# himage PC
-```
+Start the experiment and open a shell on the PC virtual node.
 Issue the ping command on the PC:
 ```
 root@PC:/ # ping 10.0.1.10
