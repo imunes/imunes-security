@@ -1,0 +1,28 @@
+#! /bin/sh
+
+dns_servers="aRootServer bRootServer cRootServer \
+             dnsCom dnsOrg dnsHr \
+             dnsFer \
+             dnsTel dnsZpm"
+
+hosts="mm www pc attacker"
+
+cd DNS_files
+
+for i in $dns_servers
+do
+    # Stop named on all DNS servers
+    himage ${i} killall -9 named 2> /dev/null
+    himage $i mkdir -p /var/named/etc/namedb
+    hcp $i/* $i:/var/named/etc/namedb
+    # Start named on all DNS servers
+    himage $i named
+done
+
+for i in $hosts
+do
+    hcp resolv.$i $i:/etc/resolv.conf
+done
+
+hcp resolv.pc attacker:/etc/resolv.conf
+cd ..

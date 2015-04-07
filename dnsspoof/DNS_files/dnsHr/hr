@@ -1,0 +1,17 @@
+; Tu cu ubaciti SOA
+;
+$TTL 60000
+@ IN SOA dnsHr.hr. root.dnsHr.hr (
+        2002102801 ; serial
+        28 ; refresh
+        14 ; retry
+        3600000 ; expire
+        0 ; default_ttl
+)
+
+@                   IN  NS   dnsHr.hr.
+dnsHr.hr.           IN  A    10.0.6.2
+
+fer.hr.             IN  NS   dnsFer.fer.hr.
+dnsFer.fer.hr.      IN  A    10.0.8.2
+
