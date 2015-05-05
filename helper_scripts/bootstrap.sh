@@ -2,7 +2,7 @@
 
 VROOT=/var/imunes/vroot
 SRCS="openssl lighttpd"
-PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake nessus metasploit"
+PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake metasploit"
 
 
 cp /etc/resolv.conf $VROOT/etc
