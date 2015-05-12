@@ -20,7 +20,7 @@ else
     done
 fi
 
-himage host@$eid pkg_info | grep "^lighttpd-" > /dev/null 2>&1
+himage host@$eid pkg info | grep "^lighttpd-" > /dev/null 2>&1
 if test $? -ne 0 ;then
     echo "This example is based on lighttpd."
     echo "Please install package lighttpd and try again."
@@ -29,6 +29,10 @@ fi
 
 for serv in $http_servers
 do
+    echo "Copying vulnerable bash to $serv"
+    hcp bash.`uname -m` $serv:/usr/local/bin/bash
+    echo "done."
+
     echo "Starting http server on $serv..."
     h=${serv}@${eid}
     himage $h mkdir -p /usr/local/etc/lighttpd
@@ -40,4 +44,5 @@ do
     hcp -r www.${serv} $h:/root
     himage $h chmod +x /root/www.${serv}/form.sh
     himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    echo "done."
 done
