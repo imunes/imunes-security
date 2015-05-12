@@ -35,7 +35,7 @@ On the virtual nodes we have previously deployed a vulnerable version of openssl
 and lighttpd. The script [heartbleed.sh](heartbleed.sh) is used to execute the
 attack. It copies the [heartbleed.py](heartbleed.py) script on the Attacker node
 and executes it. The python script used to exploit the server can be found
-[https://gist.github.com/eelsivart/10174134](here).
+[here](https://gist.github.com/eelsivart/10174134).
 
 The execution result is as follows:
 ```console
