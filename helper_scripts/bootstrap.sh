@@ -7,7 +7,7 @@ PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake metasploit"
 
 cp /etc/resolv.conf $VROOT/etc
 # install missing packages
-pkg -c $VROOT install $PKGS # fetch sources for boulding and extract them
+pkg -c $VROOT install -y $PKGS # fetch sources for boulding and extract them
 for file in $SRCS; do
 	fetch http://www.imunes.net/dl/$file.tar.gz
 	tar xf $file.tar.gz -C $VROOT/tmp/
