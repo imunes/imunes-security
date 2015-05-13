@@ -57,3 +57,6 @@ freebsd.gif
 index.html
 [www@host /root/www.host]$ 
 ```
+The attack exploits the simple [form.sh](www.host/form.sh) script, but the
+attack would be the same for any bash script that is executed as CGI if the bash
+executable is vulnerable (version < bash43-027).
