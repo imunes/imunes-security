@@ -56,7 +56,11 @@ Please wait... connection attempt 1 of 1
 ...!.9.8.........5...............
 .........3.2.....E.D...../...A.................................I.........
 ...........
-...................................#
+...................................#.......pt-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+....h.F __..3.R..h
 ```
 
 If the heartbleed script is ran repeatedly without the server actually
