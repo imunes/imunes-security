@@ -154,7 +154,7 @@ node n5 {
 node n6 {
     type pc
     network-config {
-	hostname n6
+	hostname PC2
 	!
 	interface eth0
 	 ip address 10.0.2.20/24
