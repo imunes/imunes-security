@@ -579,7 +579,7 @@ node n21 {
 node n22 {
     type pc
     network-config {
-	hostname Attacker
+	hostname attacker
 	!
 	interface eth0
 	 ipv6 address fc00:1::20/64
