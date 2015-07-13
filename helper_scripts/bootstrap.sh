@@ -16,7 +16,8 @@ done
 rm $VROOT/etc/resolv.conf
 
 # compile and install openssl
-cd $VROOT/tmp/openssl-1.0.1a && ./config && gmake
+cd $VROOT/tmp/openssl-1.0.1a && ./config 
+sed -i "" -e 's/= gcc$/= cc/g' Makefile
 chroot $VROOT make install -C /tmp/openssl-1.0.1a/
 mv $VROOT/usr/bin/openssl $VROOT/usr/bin/openssl_bkp
 chroot $VROOT ln -s /tmp/openssl-1.0.1a/apps/openssl /usr/bin/openssl
