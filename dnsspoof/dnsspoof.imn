@@ -1,6 +1,5 @@
 node n0 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname aRootServer
 	!
@@ -24,7 +23,6 @@ node n0 {
 
 node n1 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname bRootServer
 	!
@@ -48,7 +46,6 @@ node n1 {
 
 node n3 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R3
@@ -90,7 +87,6 @@ node n3 {
 
 node n4 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsCom
 	!
@@ -114,7 +110,6 @@ node n4 {
 
 node n5 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsHr
 	!
@@ -138,7 +133,6 @@ node n5 {
 
 node n6 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsFer
 	!
@@ -162,7 +156,6 @@ node n6 {
 
 node n7 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R7
@@ -199,7 +192,6 @@ node n7 {
 
 node n8 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R8
@@ -241,7 +233,6 @@ node n8 {
 
 node n9 {
     type router
-    cpu {{min 0} {max 100} {weight 1}}
     model quagga
     network-config {
 	hostname R9
@@ -290,7 +281,6 @@ node n9 {
 
 node n11 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsTel
 	!
@@ -314,7 +304,6 @@ node n11 {
 
 node n12 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname www
 	!
@@ -335,17 +324,10 @@ node n12 {
     labelcoords {120.0 425.0}
     interface-peer {eth0 n10}
     canvas c0
-    custom-enabled true
-    custom-config {
-	custom-config-id generic
-	custom-command /bin/sh
-	config {{ifconfig eth0 inet 10.0.9.3/24} {} {route -q add -inet 0.0.0.0/0 10.0.9.1} {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} rpcbind inetd {rm -f /var/run/inetd.pid} {rm -f /var/run/rpcbind.lock} {/usr/local/sbin/lighttpd -f /root/Examples/DNS+Mail+WEB/zzt.lighttpd.conf}}
-    }
 }
 
 node n13 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname mm
 	!
@@ -369,7 +351,6 @@ node n13 {
 
 node n14 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname cRootServer
 	!
@@ -393,7 +374,6 @@ node n14 {
 
 node n15 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsOrg
 	!
@@ -417,7 +397,6 @@ node n15 {
 
 node n17 {
     type host
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname dnsZpm
 	!
@@ -441,7 +420,6 @@ node n17 {
 
 node n18 {
     type pc
-    cpu {{min 0} {max 100} {weight 1}}
     network-config {
 	hostname pc
 	!
@@ -601,17 +579,14 @@ node n21 {
 
 link l0 {
     nodes {n0 n3}
-    bandwidth 100000000
 }
 
 link l1 {
     nodes {n1 n3}
-    bandwidth 100000000
 }
 
 link l3 {
     nodes {n3 n4}
-    bandwidth 100000000
 }
 
 link l4 {
@@ -628,7 +603,6 @@ link l5 {
 
 link l6 {
     nodes {n8 n5}
-    bandwidth 100000000
 }
 
 link l7 {
@@ -639,17 +613,14 @@ link l7 {
 
 link l8 {
     nodes {n9 n6}
-    bandwidth 100000000
 }
 
 link l13 {
     nodes {n8 n14}
-    bandwidth 100000000
 }
 
 link l14 {
     nodes {n7 n15}
-    bandwidth 100000000
 }
 
 link l9 {
@@ -657,7 +628,7 @@ link l9 {
 }
 
 link l10 {
-    delay 2000000
+    delay 5000000
     nodes {n11 n10}
 }
 
@@ -667,22 +638,18 @@ link l11 {
 
 link l12 {
     nodes {n13 n10}
-    bandwidth 100000000
 }
 
 link l15 {
     nodes {n9 n16}
-    bandwidth 100000000
 }
 
 link l16 {
     nodes {n17 n16}
-    bandwidth 100000000
 }
 
 link l17 {
     nodes {n16 n18}
-    bandwidth 100000000
 }
 
 link l2 {
