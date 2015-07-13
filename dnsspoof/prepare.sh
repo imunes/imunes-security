@@ -19,7 +19,7 @@ do
     himage $i mkdir -p /var/named/etc/namedb
     hcp $i/* $i:/var/named/etc/namedb
     # Start named on all DNS servers
-    himage $i named
+    himage $i named -c /var/named/etc/namedb/named.conf
 done
 
 # Copy neccessary resolv.conf files
@@ -44,7 +44,7 @@ do
 done
 
 # Send one DNS query to establish DNS hierarchy
-echo 'send(IP(src="10.0.10.3", dst="10.0.10.2")/UDP(dport=53)/DNS\
+echo 'send(IP(src="30.0.0.3", dst="30.0.0.2")/UDP(dport=53)/DNS\
 (id=43322,qr=0,rd=1,\
 qd=DNSQR(qname="dnsTel.tel.fer.hr")))
 exit()' > /tmp/prepare_dnsspoof.scapy
