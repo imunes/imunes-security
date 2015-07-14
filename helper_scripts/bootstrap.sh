@@ -1,12 +1,14 @@
 #!/bin/sh
 
-VROOT=/var/imunes/vroot
-SRCS="openssl lighttpd"
-PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake metasploit"
+set -e
 
+VROOT=/var/imunes/vroot
+SRCS="openssl nginx"
+PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake gcc"
 
 cp /etc/resolv.conf $VROOT/etc
 # install missing packages
+pkg -c $VROOT update
 pkg -c $VROOT install -y $PKGS # fetch sources for boulding and extract them
 for file in $SRCS; do
 	fetch http://www.imunes.net/dl/$file.tar.gz
@@ -15,17 +17,13 @@ for file in $SRCS; do
 done
 rm $VROOT/etc/resolv.conf
 
-# compile and install openssl
-cd $VROOT/tmp/openssl-1.0.1a && ./config 
-sed -i "" -e 's/= gcc$/= cc/g' Makefile
-chroot $VROOT make install -C /tmp/openssl-1.0.1a/
-mv $VROOT/usr/bin/openssl $VROOT/usr/bin/openssl_bkp
-chroot $VROOT ln -s /tmp/openssl-1.0.1a/apps/openssl /usr/bin/openssl
-chroot $VROOT cp /tmp/openssl-1.0.1a/apps/openssl.cnf /usr/local/ssl
-chroot $VROOT mkdir -p /usr/local/etc/lighttpd/certs
+# gcc must be available for openssl
+if ! test -e /usr/bin/gcc; then
+    chroot $VROOT ln -fs /usr/local/bin/gcc48 /usr/local/bin/gcc
+fi
 
-# compile and install lighttpd
-cd $VROOT/tmp/lighttpd-1.4.17
-./configure --with-openssl --with-openssl-libs=/tmp/openssl-1.0.1a/
-make -j4
-chroot $VROOT make install -C /tmp/lighttpd-1.4.17/
+# compile and install nginx which installs openssl
+cd $VROOT/tmp/nginx-1.9.2
+./configure --with-openssl=/tmp/openssl-1.0.1a/ --with-http_ssl_module
+chroot $VROOT sed -i "" -e "s/install LIBDIR=lib/install_sw LIBDIR=lib/" /tmp/nginx-1.9.2/objs/Makefile
+chroot $VROOT make install -C /tmp/nginx-1.9.2
