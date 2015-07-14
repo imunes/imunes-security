@@ -4,19 +4,14 @@ http_servers="host"
 
 for serv in $http_servers
 do
+    himage $serv killall nginx
     echo "Starting https server on $serv..."
     h=${serv}
-    himage $h mkdir -p /usr/local/etc/lighttpd/certs
-    hcp lighttpd.pem $h:/usr/local/etc/lighttpd/certs/lighttpd.pem
-    himage $h chmod 400 /usr/local/etc/lighttpd/certs/lighttpd.pem
-    himage $h mkdir -p /var/log/lighttpd
-    himage $h chown -R www:www /var/log/lighttpd
-
-    hcp ${serv}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
-    himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
-    hcp -r www.${serv} $h:/root
-    himage $h chmod +x /root/www.${serv}/form.sh
-    himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    hcp lighttpd.pem $h:/usr/local/nginx/conf/cert.pem
+    hcp lighttpd.pem $h:/usr/local/nginx/conf/cert.key
+    hcp ${serv}.nginx.conf $h:/usr/local/nginx/conf/nginx.conf
+    hcp www.${serv}/* $h:/usr/local/nginx/html/
+    himage $h /usr/local/nginx/sbin/nginx
 done
 
 #nmap -sV 10.0.0.10 --script ssl-heartbleed -d
