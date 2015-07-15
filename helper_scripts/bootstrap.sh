@@ -4,7 +4,7 @@ set -e
 
 VROOT=/var/imunes/vroot
 SRCS="openssl nginx"
-PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake gcc"
+PKGS="dsniff scapy p0f nmap ettercap tcpreplay hping gmake gcc wget"
 
 cp /etc/resolv.conf $VROOT/etc
 # install missing packages
