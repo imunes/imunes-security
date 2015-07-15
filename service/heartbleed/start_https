@@ -7,8 +7,8 @@ do
     himage $serv killall nginx
     echo "Starting https server on $serv..."
     h=${serv}
-    hcp lighttpd.pem $h:/usr/local/nginx/conf/cert.pem
-    hcp lighttpd.pem $h:/usr/local/nginx/conf/cert.key
+    hcp cert.pem $h:/usr/local/nginx/conf/
+    hcp cert.pem $h:/usr/local/nginx/conf/cert.key
     hcp ${serv}.nginx.conf $h:/usr/local/nginx/conf/nginx.conf
     hcp www.${serv}/* $h:/usr/local/nginx/html/
     himage $h /usr/local/nginx/sbin/nginx
