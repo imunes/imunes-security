@@ -1,7 +1,8 @@
 # DNS spoofing attack
 
 This example covers the DNS spoofing attack, a simplified version of the
-Kaminsky DNS attack. The IMUNES topology looks like this: 
+Kaminsky DNS attack. The IMUNES topology looks like this:
+
 ![DNS spoofing topology](http://imunes.tel.fer.hr/images/topologies/kaminsky.png)
 
 ## Starting the DNS server hierarchy
