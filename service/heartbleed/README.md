@@ -15,24 +15,25 @@ the https server is running on the host node.
 ```console
 root@host:/ # ps ax
  PID TT  STAT    TIME COMMAND
- 9733 ??  IsJ  0:00.00 rpcbind
- 9735 ??  IsJ  0:00.00 inetd
- 9895 ??  SJ   0:00.00 lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
- 9897  2  SJ   0:00.01 csh
- 9911  2  R+J  0:00.00 ps ax
-root@host:/ # netstat -anfinet
+ 11168 ??  IsJ  0:00.00 rpcbind
+ 11170 ??  IsJ  0:00.00 inetd
+ 11281 ??  SsJ  0:00.00 nginx: master process /usr/local/nginx/sbin/nginx
+ 11282 ??  SJ   0:00.00 nginx: worker process (nginx)
+ 11284  0  SJ   0:00.01 csh
+ 11298  0  R+J  0:00.00 ps ax
+root@host:/ # netstat -an4
 Active Internet connections (including servers)
 Proto Recv-Q Send-Q Local Address          Foreign Address        (state)
 tcp4       0      0 *.443                  *.*                    LISTEN
 tcp4       0      0 *.80                   *.*                    LISTEN
 tcp4       0      0 *.111                  *.*                    LISTEN
-udp4       0      0 *.618                  *.*                    
-udp4       0      0 *.111                  *.*      
+udp4       0      0 *.783                  *.*
+udp4       0      0 *.111                  *.*
 ```
 
 ## Executing the attack
 On the virtual nodes we have previously deployed a vulnerable version of openssl
-and lighttpd. The script [heartbleed.sh](heartbleed.sh) is used to execute the
+which is used by nginx. The script [heartbleed.sh](heartbleed.sh) is used to execute the
 attack. It copies the [heartbleed.py](heartbleed.py) script on the Attacker node
 and executes it. The python script used to exploit the server can be found
 [here](https://gist.github.com/eelsivart/10174134).
