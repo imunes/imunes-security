@@ -56,7 +56,6 @@ node n3 {
 	!
 	ip route 0.0.0.0/0 10.0.0.1
 	!
-	ipv6 route ::/0 fc00::1
 	!
     }
     canvas c0
@@ -166,6 +165,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0
