@@ -3,7 +3,12 @@
 # enable MONLIST in ntp.conf and start the ntpd on n# nodes
 for x in $(seq 1 16); do 
     sudo hcp ntp.conf n$x:/etc/
-    sudo himage n$x service ntpd onestart
+    if test `uname -s` = "Linux"; then
+        sudo himage n$x killall -q ntpd
+        sudo himage n$x nohup ntpd
+    else
+        sudo himage n$x service ntpd onestart
+    fi
 done
 
 # copy the scapy script to the attacker
