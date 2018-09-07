@@ -9,13 +9,26 @@ http_servers="www rogueServer"
 
 hosts="mm www pc attacker"
 
+os=`uname -s`;
+isOSlinux() {
+    if test $os = "Linux"; then
+        true;
+    else
+        false;
+    fi
+}
+
 cd DNS_files
 
 # Start DNS on all neccessary nodes
 for i in $dns_servers
 do
     # Stop named on all DNS servers
-    himage ${i} killall -9 named 2> /dev/null
+    if isOSlinux; then
+        himage ${i} killall -q -9 named
+    else
+        himage ${i} killall -9 named 2> /dev/null
+    fi
     himage $i mkdir -p /var/named/etc/namedb
     hcp $i/* $i:/var/named/etc/namedb
     # Start named on all DNS servers
@@ -33,6 +46,9 @@ cd ..
 # Start http servers
 for h in $http_servers
 do
+    if isOSlinux; then
+        himage $h useradd www
+    fi
     himage $h mkdir -p /usr/local/etc/lighttpd
     himage $h mkdir -p /var/log/lighttpd
     himage $h chown -R www:www /var/log/lighttpd
@@ -40,7 +56,13 @@ do
     hcp ${h}.lighttpd.conf $h:/usr/local/etc/lighttpd/lighttpd.conf
     himage $h chmod 755 /usr/local/etc/lighttpd/lighttpd.conf
     hcp -r www.$h $h:/root
-    himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    if isOSlinux; then
+        himage ${i} killall -q -9 lighttpd
+        himage $h nohup lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    else
+        himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+        himage $h lighttpd -f /usr/local/etc/lighttpd/lighttpd.conf
+    fi
 done
 
 # Send one DNS query to establish DNS hierarchy
