@@ -23,7 +23,7 @@ exit()' > /tmp/prepare_dnsspoof.scapy
     himage attacker scapy -c prepare_dnsspoof.scapy &
 
     # Catch the packet to get port and id of the DNS packet
-    val=`sudo himage dnsZpm tcpdump -l -c 1 -ni eth0 '(port 53 && dst 20.0.0.2)'`
+    val=`sudo himage dnsZpm tcpdump -l -c 1 -ni eth0 '(port 53 && dst 20.0.0.2)' | fgrep ">"`
 
     port=`echo $val | cut -d' ' -f3 | cut -d'.' -f5`
     id=`echo $val | cut -d' ' -f6`
