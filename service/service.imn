@@ -27,12 +27,12 @@ node n0 {
 node n1 {
     type lanswitch
     network-config {
-	hostname switch
+	hostname sw1
 	!
     }
     canvas c0
-    iconcoords {456.0 240.0}
-    labelcoords {456.0 268.0}
+    iconcoords {456 240}
+    labelcoords {458 216}
     interface-peer {e0 n0}
     interface-peer {e1 n3}
     interface-peer {e2 n2}
@@ -105,8 +105,8 @@ node n2 {
 	!
     }
     canvas c0
-    iconcoords {720.0 240.0}
-    labelcoords {720.0 270.0}
+    iconcoords {720 240}
+    labelcoords {778 243}
     interface-peer {eth0 n1}
     interface-peer {eth1 n4}
     interface-peer {eth2 n5}
@@ -115,7 +115,7 @@ node n2 {
 node n4 {
     type host
     network-config {
-	hostname host
+	hostname Host
 	!
 	interface eth0
 	 ip address 10.0.1.10/24
@@ -133,20 +133,21 @@ node n4 {
 	!
     }
     canvas c0
-    iconcoords {720.0 48.0}
-    labelcoords {720.0 89.0}
+    iconcoords {720 48}
+    labelcoords {761 50}
     interface-peer {eth0 n2}
+    services {ssh telnet ftp}
 }
 
 node n5 {
     type lanswitch
     network-config {
-	hostname n5
+	hostname sw2
 	!
     }
     canvas c0
-    iconcoords {720.0 360.0}
-    labelcoords {720.0 388.0}
+    iconcoords {720 360}
+    labelcoords {763 360}
     interface-peer {e0 n2}
     interface-peer {e1 n6}
 }
@@ -219,6 +220,7 @@ option show {
     link_labels yes
     background_images no
     annotations yes
+    hostsAutoAssign no
     grid yes
     iconSize normal
     zoom 1.0
