@@ -31,8 +31,8 @@ node n1 {
 	!
     }
     canvas c0
-    iconcoords {456.0 240.0}
-    labelcoords {456.0 268.0}
+    iconcoords {456 240}
+    labelcoords {458 215}
     interface-peer {e0 n0}
     interface-peer {e1 n3}
     interface-peer {e2 n2}
@@ -110,7 +110,7 @@ node n2 {
 node n4 {
     type host
     network-config {
-	hostname n4
+	hostname host
 	!
 	interface eth0
 	 ip address 10.0.1.10/24
@@ -128,9 +128,10 @@ node n4 {
 	!
     }
     canvas c0
-    iconcoords {720.0 48.0}
-    labelcoords {720.0 89.0}
+    iconcoords {720 48}
+    labelcoords {761 48}
     interface-peer {eth0 n2}
+    services {ssh}
 }
 
 link l0 {
