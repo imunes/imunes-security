@@ -1,11 +1,18 @@
-#! /usr/bin/env python
-#
-# Before startup, open new window on PC and start ssh session from PC to Host.
-#
-# Copy the script to the Attacker host and start it:
-# hcp rst.sh Attacker:
+#! /usr/bin/env python2
+'''
+TCP reset attack demo.
+
+Start IMUNES experiment:
+# imunes -b ../service.imn
+
+Open new window on node PC or use himage and start ssh session from PC to Host:
+# himage PC ssh imunes@10.0.1.10
+
+Copy the script to the Attacker host and start it:
+# hcp tcprst.py Attacker:
 # himage Attacker ./tcprst.py
-# --> the result of the script is "Broken pipe" in ssh session between PC and Host.
+--> the result of the script is "Broken pipe" in ssh session between PC and Host.
+'''
 
 from scapy.all import *
 import os
@@ -46,7 +53,7 @@ if os.uname()[1] != "Attacker":
     exit(2)
 
 # enable IP packet forwarding and disable sending of IP redirects
-if isOSlinux:
+if isOSlinux():
     os.system("sysctl -w net.ipv4.conf.eth0.forwarding=1")
 else:
     os.system("sysctl -w net.inet.ip.forwarding=1")
